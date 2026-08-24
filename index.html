@@ -1370,8 +1370,15 @@
     }
 
     .upload-zone-icon {
-      font-size: 2rem;
-      opacity: .5;
+      width: 52px;
+      height: 52px;
+      opacity: .55;
+      color: var(--amber);
+      transition: opacity .3s, transform .3s;
+    }
+    .upload-zone:hover .upload-zone-icon {
+      opacity: 1;
+      transform: scale(1.1);
     }
 
     .upload-zone-title {
@@ -2150,6 +2157,39 @@
       color: var(--amber);
     }
 
+    /* YouTube hero CTA buttons */
+    .pm-hero-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 16px 24px;
+      background: rgba(0,0,0,.35);
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .pm-yt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      background: #ff0000;
+      color: #fff;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .25s, transform .2s, box-shadow .25s;
+      box-shadow: 0 4px 18px rgba(255,0,0,.35);
+    }
+    .pm-yt-btn:hover {
+      background: #cc0000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,0,0,.5);
+    }
+    .pm-yt-btn svg { flex-shrink: 0; }
+
     /* ════════════════════════════════
    CV MODAL
 ════════════════════════════════ */
@@ -2504,6 +2544,7 @@ body.admin-mode .admin-badge {
       <span class="pm-hero-emoji" id="pmHeroEmoji"></span>
       <div class="pm-hero-award" id="pmAward" style="display:none;"></div>
     </div>
+    <div class="pm-hero-links" id="pmHeroLinks" style="display:none;"></div>
     <div class="pm-content">
       <h2 class="pm-title" id="pmTitle"></h2>
       <div class="pm-meta">
@@ -2829,8 +2870,7 @@ body.admin-mode .admin-badge {
           <div class="proj-thumb" style="background: linear-gradient(135deg,#0a1f12,#153d22);">
             <img src="images/flood-runner.png" alt="Flood Runner" onerror="this.style.display='none';" />
             <div class="proj-thumb-inner" style="background:linear-gradient(135deg,#1a472a,#52b788);"></div>
-            <span class="proj-emoji" style="position:absolute;z-index:0;">🌊</span>
-            <div class="proj-award">🏆 QS Top 10 · 2026</div>
+            <div class="proj-award">QS Top 10 · 2026</div>
           </div>
           <div class="proj-body">
             <span class="proj-num">001</span>
@@ -2859,7 +2899,6 @@ body.admin-mode .admin-badge {
           <div class="proj-thumb" style="background:linear-gradient(135deg,#0f0a1e,#1e0d3c);">
             <img src="images/vr-museum.jpg" alt="VR Museum Research" onerror="this.style.display='none';" />
             <div class="proj-thumb-inner" style="background:linear-gradient(135deg,#3730a3,#7c3aed);"></div>
-            <span class="proj-emoji" style="position:absolute;z-index:0;">🥽</span>
           </div>
           <div class="proj-body">
             <span class="proj-num">002</span>
@@ -2885,7 +2924,6 @@ body.admin-mode .admin-badge {
           <div class="proj-thumb" style="background:linear-gradient(135deg,#06101e,#0d2548);">
             <img src="images/disney.jpg" alt="Disney CIS Design" onerror="this.style.display='none';" />
             <div class="proj-thumb-inner" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);"></div>
-            <span class="proj-emoji" style="position:absolute;z-index:0;">✨</span>
           </div>
           <div class="proj-body">
             <span class="proj-num">003</span>
@@ -2911,7 +2949,6 @@ body.admin-mode .admin-badge {
           <div class="proj-thumb" style="background:linear-gradient(135deg,#160a2a,#2d0a55);">
             <img src="images/siggraph.jpg" alt="SIGGRAPH Malaysia" onerror="this.style.display='none';" />
             <div class="proj-thumb-inner" style="background:linear-gradient(135deg,#7c3aed,#c026d3);"></div>
-            <span class="proj-emoji" style="position:absolute;z-index:0;">🎭</span>
           </div>
           <div class="proj-body">
             <span class="proj-num">004</span>
@@ -2937,7 +2974,6 @@ body.admin-mode .admin-badge {
           <div class="proj-thumb" style="background:linear-gradient(135deg,#1a0e00,#3d1f00);">
             <img src="images/game-jam.png" alt="Game Jam Entry" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/game-jam.jpg';}else{this.style.display='none';}" />
             <div class="proj-thumb-inner" style="background:linear-gradient(135deg,#92400e,#d97706);"></div>
-            <span class="proj-emoji" style="position:absolute;z-index:0;">⏱️</span>
           </div>
           <div class="proj-body">
             <span class="proj-num">005</span>
@@ -3075,19 +3111,19 @@ body.admin-mode .admin-badge {
       <div class="upload-zones sr sr-delay-2 admin-only">
         <div class="upload-zone" onclick="document.getElementById('upImg').click()" tabindex="0" role="button"
           aria-label="Upload images">
-          <span class="upload-zone-icon">🖼️</span>
+          <svg class="upload-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           <span class="upload-zone-title" data-i18n="upImg">Images & Renders</span>
           <span class="upload-zone-sub" data-i18n="upImgSub">PNG · JPG · GIF · WebP</span>
         </div>
         <div class="upload-zone" onclick="document.getElementById('upVid').click()" tabindex="0" role="button"
           aria-label="Upload video">
-          <span class="upload-zone-icon">🎬</span>
+          <svg class="upload-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
           <span class="upload-zone-title" data-i18n="upVid">Videos & Animations</span>
           <span class="upload-zone-sub" data-i18n="upVidSub">MP4 · WebM · MOV</span>
         </div>
         <div class="upload-zone" onclick="document.getElementById('upPdf').click()" tabindex="0" role="button"
           aria-label="Upload documents">
-          <span class="upload-zone-icon">📄</span>
+          <svg class="upload-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           <span class="upload-zone-title" data-i18n="upDoc">Documents & PDFs</span>
           <span class="upload-zone-sub" data-i18n="upDocSub">Research · Case Studies</span>
         </div>
@@ -3511,22 +3547,24 @@ body.admin-mode .admin-badge {
         title: 'Flood Runner',
         year: '2026',
         type: '3D Serious Game',
-        emoji: '🌊',
-        award: '🏆 QS Impact Skills — 10',
+        emoji: '',
+        award: 'QS Impact Skills — Top 10',
         heroImg: 'images/flood-runner.png',
         heroBg: 'linear-gradient(135deg,#1a472a,#52b788)',
         tags: ['Unity', 'C#', '3D', 'Blender', 'Educational', 'SDG'],
         desc: `<p><strong>Flood Runner</strong> is a 3D educational serious game developed for the <strong>QS Impact Skills Challenge 2026</strong>. The game immerses players in realistic flood scenarios where they learn survival strategies, prevention techniques, and awareness of the <strong>UN Sustainable Development Goals</strong> — particularly SDG 11 (Sustainable Cities) and SDG 13 (Climate Action).</p>
     <p>The project earned a <strong>Top 10 national placement</strong> and was praised for its educational impact, visual quality, and gameplay depth. Built in <strong>Unity</strong> with custom 3D assets modeled in <strong>Blender</strong>.</p>`,
         highlights: [
-          { icon: '🏆', text: 'Top 10 placement at QS Impact Skills 2026 (national)' },
-          { icon: '🎮', text: 'Immersive 3D gameplay with flood physics simulation' },
-          { icon: '📚', text: 'Aligned with UN SDG 11 & SDG 13 educational objectives' },
-          { icon: '🎨', text: 'Custom 3D assets — terrain, buildings, water effects, UI' },
-          { icon: '🔊', text: 'Sound design and ambient environmental audio' }
+          { icon: '•', text: 'Top 10 placement at QS Impact Skills 2026 (national)' },
+          { icon: '•', text: 'Immersive 3D gameplay with flood physics simulation' },
+          { icon: '•', text: 'Aligned with UN SDG 11 & SDG 13 educational objectives' },
+          { icon: '•', text: 'Custom 3D assets — terrain, buildings, water effects, UI' },
+          { icon: '•', text: 'Sound design and ambient environmental audio' }
         ],
         media: [],
-        links: []
+        links: [
+          { label: 'YouTube Game Demo', url: 'https://www.youtube.com/watch?v=db7VP1NmSoc' }
+        ]
       },
       {
         id: 1,
@@ -3534,7 +3572,7 @@ body.admin-mode .admin-badge {
         title: 'VR Museum Research',
         year: '2024–Present',
         type: 'Academic Research',
-        emoji: '🥽',
+        emoji: '',
         award: null,
         heroImg: 'images/vr-museum.jpg',
         heroBg: 'linear-gradient(135deg,#3730a3,#7c3aed)',
@@ -3542,10 +3580,10 @@ body.admin-mode .admin-badge {
         desc: `<p>An ongoing <strong>academic research project</strong> comparing <strong>photorealistic vs. stylized rendering</strong> approaches in VR museum environments. The study investigates how different rendering styles affect user <strong>presence, immersion, cognitive load</strong>, and <strong>learning effectiveness</strong>.</p>
     <p>The research involves designing two parallel VR museum galleries — one photorealistic, one stylized — and conducting user studies to measure experiential outcomes.</p>`,
         highlights: [
-          { icon: '🔬', text: 'Controlled user study with quantitative & qualitative data' },
-          { icon: '🥽', text: 'Two complete VR museum environments built in Unity' },
-          { icon: '📊', text: 'Analysis of presence, immersion, and learning metrics' },
-          { icon: '🎨', text: 'Photorealistic vs. cel-shaded/stylized rendering comparison' }
+          { icon: '•', text: 'Controlled user study with quantitative & qualitative data' },
+          { icon: '•', text: 'Two complete VR museum environments built in Unity' },
+          { icon: '•', text: 'Analysis of presence, immersion, and learning metrics' },
+          { icon: '•', text: 'Photorealistic vs. cel-shaded/stylized rendering comparison' }
         ],
         media: [],
         links: []
@@ -3556,7 +3594,7 @@ body.admin-mode .admin-badge {
         title: 'Disney CIS Design',
         year: '2024–2025',
         type: 'Visual Design & Localization',
-        emoji: '✨',
+        emoji: '',
         award: null,
         heroImg: 'images/disney.jpg',
         heroBg: 'linear-gradient(135deg,#1d4ed8,#3b82f6)',
@@ -3564,10 +3602,10 @@ body.admin-mode .admin-badge {
         desc: `<p>Contributed <strong>visual design and localization</strong> work for <strong>Disney's CIS-region</strong> digital campaigns. This involved adapting creative assets, promotional materials, and marketing visuals for <strong>Central Asian & Eastern European markets</strong>.</p>
     <p>Worked on <strong>Kazakh and Russian language</strong> adaptations, ensuring typographic excellence, cultural sensitivity, and brand consistency across all deliverables.</p>`,
         highlights: [
-          { icon: '🏰', text: 'Official creative work for Disney CIS region' },
-          { icon: '🌍', text: 'Kazakh & Russian language localization' },
-          { icon: '🎨', text: 'Digital campaign assets and promotional materials' },
-          { icon: '✅', text: 'Maintained Disney brand guidelines throughout' }
+          { icon: '•', text: 'Official creative work for Disney CIS region' },
+          { icon: '•', text: 'Kazakh & Russian language localization' },
+          { icon: '•', text: 'Digital campaign assets and promotional materials' },
+          { icon: '•', text: 'Maintained Disney brand guidelines throughout' }
         ],
         media: [],
         links: []
@@ -3578,7 +3616,7 @@ body.admin-mode .admin-badge {
         title: 'SIGGRAPH Malaysia',
         year: '2026',
         type: 'Event Branding & Design',
-        emoji: '🎭',
+        emoji: '',
         award: null,
         heroImg: 'images/siggraph.jpg',
         heroBg: 'linear-gradient(135deg,#7c3aed,#c026d3)',
@@ -3586,10 +3624,10 @@ body.admin-mode .admin-badge {
         desc: `<p>Serving as a <strong>Design Committee member</strong> for the <strong>SIGGRAPH Malaysia 2026 Student Chapter</strong> — one of Asia's most prestigious computer graphics and interactive media conferences.</p>
     <p>Responsible for <strong>event branding</strong>, promotional collateral, social media visual identity, and printed materials for the chapter's activities and events.</p>`,
         highlights: [
-          { icon: '🎭', text: 'SIGGRAPH — world\'s leading CG & interactive media org' },
-          { icon: '🖼️', text: 'Event posters, banners, and social media templates' },
-          { icon: '📐', text: 'Cohesive visual identity and brand guidelines' },
-          { icon: '🤝', text: 'Collaborative design work with student chapter team' }
+          { icon: '•', text: 'SIGGRAPH — world\'s leading CG & interactive media org' },
+          { icon: '•', text: 'Event posters, banners, and social media templates' },
+          { icon: '•', text: 'Cohesive visual identity and brand guidelines' },
+          { icon: '•', text: 'Collaborative design work with student chapter team' }
         ],
         media: [],
         links: []
@@ -3600,7 +3638,7 @@ body.admin-mode .admin-badge {
         title: 'Game Jam Entry',
         year: '2024',
         type: '48-Hour Game Prototype',
-        emoji: '⏱️',
+        emoji: '',
         award: null,
         heroImg: 'images/game-jam.png',
         heroBg: 'linear-gradient(135deg,#92400e,#d97706)',
@@ -3608,13 +3646,15 @@ body.admin-mode .admin-badge {
         desc: `<p>A complete <strong>game prototype</strong> built from scratch in <strong>48 hours</strong> during the <strong>Global Game Jam</strong>. Collaborated with a multidisciplinary team under extreme time constraints to deliver a polished, playable experience.</p>
     <p>Handled <strong>3D asset creation</strong>, scene composition, core game mechanics, and visual polish.</p>`,
         highlights: [
-          { icon: '⏱️', text: 'Full game built in 48 hours from concept to playable' },
-          { icon: '👥', text: 'Team collaboration — art, code, audio, design' },
-          { icon: '🎨', text: 'Custom 3D assets created in Blender' },
-          { icon: '🕹️', text: 'Core mechanics, level design, and UI implementation' }
+          { icon: '•', text: 'Full game built in 48 hours from concept to playable' },
+          { icon: '•', text: 'Team collaboration — art, code, audio, design' },
+          { icon: '•', text: 'Custom 3D assets created in Blender' },
+          { icon: '•', text: 'Core mechanics, level design, and UI implementation' }
         ],
         media: [],
-        links: []
+        links: [
+          { label: 'YouTube Gameplay', url: 'https://www.youtube.com/watch?v=LsMVgjLEYX4' }
+        ]
       }
     ];
 
@@ -3636,7 +3676,8 @@ body.admin-mode .admin-badge {
       document.getElementById('pmTitle').textContent = p.title;
       document.getElementById('pmYear').textContent = p.year;
       document.getElementById('pmType').textContent = p.type;
-      document.getElementById('pmHeroEmoji').textContent = p.emoji;
+      const emojiEl = document.getElementById('pmHeroEmoji');
+      if (emojiEl) emojiEl.style.display = 'none';
       document.getElementById('pmHeroBg').style.background = p.heroBg;
       document.getElementById('pmDesc').innerHTML = p.desc;
 
@@ -3679,10 +3720,27 @@ body.admin-mode .admin-badge {
         `<div class="pm-hl"><span class="pm-hl-icon">${h.icon}</span><span class="pm-hl-text">${h.text}</span></div>`
       ).join('');
 
-      // Links
+      // Hero YouTube buttons (prominent)
+      const heroLinksEl = document.getElementById('pmHeroLinks');
+      const ytLinks = p.links ? p.links.filter(l => l.url.includes('youtube') || l.url.includes('youtu.be')) : [];
+      if (ytLinks.length > 0) {
+        heroLinksEl.style.display = '';
+        heroLinksEl.innerHTML = ytLinks.map(l => `
+          <a class="pm-yt-btn" href="${l.url}" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            ${l.label}
+          </a>`).join('');
+      } else {
+        heroLinksEl.style.display = 'none';
+        heroLinksEl.innerHTML = '';
+      }
+
+      // Links section (non-YouTube + full gallery)
       document.getElementById('pmLinks').innerHTML =
-        `<a class="pm-link" href="#gallery" onclick="closePM()">📷 Full Gallery</a>` +
-        (p.links.map(l => `<a class="pm-link" href="${l.url}" target="_blank">${l.icon || '🔗'} ${l.label}</a>`).join(''));
+        `<a class="pm-link" href="#gallery" onclick="closePM()">Full Gallery</a>` +
+        (p.links ? p.links.filter(l => !l.url.includes('youtube') && !l.url.includes('youtu.be')).map(l => `<a class="pm-link" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('') : '');
 
       // Render media gallery
       renderPMGallery();
@@ -3744,80 +3802,23 @@ body.admin-mode .admin-badge {
       }).join('');
     }
 
-    async function delPMmedia(pid, idx) {
-      const m = projectsData[pid].media[idx];
-      if (m && m.id) {
-        await dbDelete('projectMedia', m.id);
-      }
-      if (m && m.url && m.url.startsWith('blob:')) {
-        URL.revokeObjectURL(m.url);
-      }
-      projectsData[pid].media.splice(idx, 1);
-      renderPMGallery();
-    }
-
-    function openPMlb(pid, idx) {
-      const m = projectsData[pid].media[idx];
-      if (!m) return;
-      const lb = document.getElementById('lightbox');
-      const cont = document.getElementById('lbContent');
-      cont.innerHTML = m.type === 'img'
-        ? `<img src="${m.url}" alt="${m.name}" />`
-        : `<video src="${m.url}" controls autoplay style="max-width:88vw;max-height:80vh;border-radius:4px;"></video>`;
-      lb.classList.add('on');
-    }
-
-    /* ── Load persisted files on startup ── */
-    async function loadSavedData() {
-      try {
-        const savedGal = await dbGetAll('gallery');
-        files = savedGal.map(item => ({
-          id: item.id,
-          type: item.type,
-          name: item.name,
-          url: URL.createObjectURL(item.blob)
-        }));
-        renderGal();
-
-        const savedPM = await dbGetAll('projectMedia');
-        savedPM.forEach(item => {
-          if (projectsData[item.projId]) {
-            projectsData[item.projId].media.push({
-              id: item.id,
-              type: item.type,
-              name: item.name,
-              url: URL.createObjectURL(item.blob)
-            });
-          }
-        });
-        if (currentProjId !== null) {
-          renderPMGallery();
-        }
-      } catch (err) {
-        console.error('Failed to load stored files from IndexedDB:', err);
-      }
-    }
-
-    loadSavedData();
-
-
     /* ═══ LANGUAGE TOGGLE ═══ */
     const translations = {
       en: {
         navAbout: 'About', navSkills: 'Skills', navProjects: 'Projects',
         navTimeline: 'Timeline', navGallery: 'Gallery', navContact: 'Contact',
-        navAvailable: 'Available',
+        navAvailable: 'Available', navCV: 'CV / Resume',
         heroEyebrow: 'Multimedia · VR/AR · Game Dev',
         heroName1: 'Personal', heroName2: 'Portfolio',
         heroRole: 'Kazakhstan · Malaysia',
         heroTagline: '"Crafting worlds at the edge of reality."',
         heroViewWork: 'View Work', heroGallery: 'Gallery', heroContact: 'Contact',
-        heroScroll: 'Scroll',
+        heroCV: 'Resume / CV', heroScroll: 'Scroll',
         statQS: 'QS Top 10', statLangs: 'Languages', statTools: 'Tools', statYears: 'Years Exp.',
         aboutEyebrow: 'About',
         aboutNameArt: 'A creator<br>living at<br>the<em>intersection</em>',
         aboutUni: 'APU · Kuala Lumpur · Level 2',
-        langKZ: '🇰🇿 Kazakh', langRU: '🇷🇺 Russian', langEN: '🇬🇧 English',
+        langKZ: 'Kazakh', langRU: 'Russian', langEN: 'English',
         bio1: 'I\'m <strong>Rakhimzhan Baurzhanuly</strong> — a Multimedia Technology student at <strong>Asia Pacific University</strong> in Kuala Lumpur, specializing in <strong>Virtual & Augmented Reality</strong>. I sit at the intersection of engineering and fine art, building immersive experiences that captivate, educate, and push into new territory.',
         bio2: 'My work spans <strong>3D artistry</strong> in Blender, Maya & 3ds Max, <strong>game development</strong> in Unity with C#, <strong>motion & interactive media</strong> in Adobe Animate, and <strong>UI/UX design</strong> in Figma. I believe the best digital experiences feel inevitable — effortless craft hiding complex thought.',
         hl1Title: 'Top 10 · QS Impact Skills 2026',
@@ -3837,7 +3838,7 @@ body.admin-mode .admin-badge {
         projEyebrow: 'Selected Work',
         projTitle: 'Featured <em>Projects</em>',
         projSubtext: 'A selection of my most meaningful work — from award-winning serious games to VR research and international design commissions.',
-        proj1Desc: 'A 3D educational serious game built for QS Impact Skills 2026. Players navigate flood scenarios, learning survival and prevention strategies aligned with UN Sustainable Development Goals. Earned a 10 placement nationally.',
+        proj1Desc: 'A 3D educational serious game built for QS Impact Skills 2026. Players navigate flood scenarios, learning survival and prevention strategies aligned with UN Sustainable Development Goals. Earned a Top 10 placement nationally.',
         proj2Desc: 'Academic study comparing photorealistic vs. stylized rendering in VR museum environments — analyzing user presence, immersion, and learning effectiveness.',
         proj3Desc: 'Visual design and Kazakh / Russian localization for Disney\'s CIS digital campaigns. Adapted creative assets and promotional materials for Central Asian & Eastern European markets.',
         proj4Desc: 'Event branding and visual identity design for SIGGRAPH Malaysia 2026 Student Chapter — one of Asia\'s premier computer graphics and interactive media conferences.',
@@ -3870,7 +3871,7 @@ body.admin-mode .admin-badge {
         ctLoc: 'Location', ctUni: 'University', ctLangs: 'Languages', ctStatus: 'Status',
         ctLocVal: 'Kuala Lumpur, Malaysia', ctUniVal: 'Asia Pacific University (APU)',
         ctLangsVal: 'Kazakh · Russian · English',
-        ctStatusVal: '✓ Available for Opportunities',
+        ctStatusVal: 'Available for Opportunities',
         fName: 'Name', fEmail: 'Email', fSubject: 'Subject', fMessage: 'Message',
         fSend: 'Send Message',
         phName: 'Your full name', phEmail: 'hello@example.com',
@@ -3881,23 +3882,26 @@ body.admin-mode .admin-badge {
         pmGallery: 'Gallery', pmLinks: 'Links',
         pmUploadHint: 'Upload screenshots, renders, or GIFs for this project.',
         pmUploadBtn: 'Add photos / GIF / video',
-        pmBack: '← Back to projects'
+        pmBack: '← Back to projects',
+        filterAll: 'All Work (5)', filterVR: 'VR / AR', filterGames: '3D & Games', filterDesign: 'Design & Branding',
+        cvTitle: 'Curriculum Vitae', cvSub: 'Rakhimzhan Baurzhanuly · Multimedia & VR/AR',
+        cvClose: 'Close', cvPrint: 'Print / View PDF', cvDownload: 'Download CV'
       },
       ru: {
         navAbout: 'Обо мне', navSkills: 'Навыки', navProjects: 'Проекты',
         navTimeline: 'Путь', navGallery: 'Галерея', navContact: 'Контакт',
-        navAvailable: 'Доступен',
+        navAvailable: 'Доступен', navCV: 'Резюме / CV',
         heroEyebrow: 'Мультимедиа · VR/AR · Геймдев',
         heroName1: 'Личное', heroName2: 'Портфолио',
         heroRole: 'Казахстан · Малайзия',
         heroTagline: '«Создаю миры на грани реальности.»',
         heroViewWork: 'Работы', heroGallery: 'Галерея', heroContact: 'Контакт',
-        heroScroll: 'Листай',
+        heroCV: 'Резюме / CV', heroScroll: 'Листай',
         statQS: 'QS Топ-10', statLangs: 'Языков', statTools: 'Инструм.', statYears: 'Лет опыта',
         aboutEyebrow: 'Обо мне',
         aboutNameArt: 'Создатель<br>живущий на<br><em>пересечении</em>',
         aboutUni: 'APU · Куала-Лумпур · 2 курс',
-        langKZ: '🇰🇿 Казахский', langRU: '🇷🇺 Русский', langEN: '🇬🇧 Английский',
+        langKZ: 'Казахский', langRU: 'Русский', langEN: 'Английский',
         bio1: 'Я — <strong>Рахимжан Бауржанулы</strong>, студент мультимедиа-технологий в <strong>Asia Pacific University</strong> (Куала-Лумпур), специализирующийся на <strong>виртуальной и дополненной реальности</strong>. Нахожусь на пересечении инженерии и искусства, создавая иммерсивные проекты, которые увлекают, обучают и раздвигают границы.',
         bio2: 'Моя работа охватывает <strong>3D-моделирование</strong> в Blender, Maya и 3ds Max, <strong>разработку игр</strong> на Unity с C#, <strong>моушн-дизайн</strong> в Adobe Animate и <strong>UI/UX дизайн</strong> в Figma. Лучшие цифровые проекты выглядят так, будто созданы легко — но за ними стоит глубокая работа.',
         hl1Title: 'Топ-10 · QS Impact Skills 2026',
@@ -3950,91 +3954,7 @@ body.admin-mode .admin-badge {
         ctLoc: 'Местоположение', ctUni: 'Университет', ctLangs: 'Языки', ctStatus: 'Статус',
         ctLocVal: 'Куала-Лумпур, Малайзия', ctUniVal: 'Asia Pacific University (APU)',
         ctLangsVal: 'Казахский · Русский · Английский',
-        ctStatusVal: '✓ Открыт для предложений',
-        fName: 'Имя', fEmail: 'Email', fSubject: 'Тема', fMessage: 'Сообщение',
-        fSend: 'Отправить',
-        phName: 'Ваше полное имя', phEmail: 'hello@example.com',
-        phSubject: 'Стажировка / Сотрудничество / Запрос по проекту',
-        phMsg: 'Расскажите о возможности...',
-        footerCopy: '© 2026 Rakhimzhan Baurzhanuly · Kuala Lumpur',
-        pmAbout: 'About this project', pmHighlights: 'Key highlights',
-        pmGallery: 'Gallery', pmLinks: 'Links',
-        pmUploadHint: 'Upload screenshots, renders, or GIFs for this project.',
-        pmUploadBtn: 'Add photos / GIF / video',
-        pmBack: '← Back to projects',
-        navCV: 'CV / Resume', heroCV: '📄 Resume / CV',
-        filterAll: 'All Work (5)', filterVR: 'VR / AR', filterGames: '3D & Games', filterDesign: 'Design & Branding',
-        cvTitle: 'Curriculum Vitae', cvSub: 'Rakhimzhan Baurzhanuly · Multimedia & VR/AR',
-        cvClose: 'Close', cvPrint: '📄 Print / View PDF', cvDownload: '📥 Download CV'
-      },
-      ru: {
-        navAbout: 'Обо мне', navSkills: 'Навыки', navProjects: 'Проекты',
-        navTimeline: 'Путь', navGallery: 'Галерея', navContact: 'Контакт',
-        navAvailable: 'Доступен',
-        heroEyebrow: 'Мультимедиа · VR/AR · Геймдев',
-        heroName1: 'Личное', heroName2: 'Портфолио',
-        heroRole: 'Казахстан · Малайзия',
-        heroTagline: '«Создаю миры на грани реальности.»',
-        heroViewWork: 'Работы', heroGallery: 'Галерея', heroContact: 'Контакт',
-        heroScroll: 'Листай',
-        statQS: 'QS Топ-10', statLangs: 'Языков', statTools: 'Инструм.', statYears: 'Лет опыта',
-        aboutEyebrow: '01 / ОБО МНЕ',
-        aboutNameArt: 'Создатель<br>живущий на<br><em>пересечении</em>',
-        aboutUni: 'APU · Куала-Лумпур · 2 курс',
-        langKZ: '🇰🇿 Казахский', langRU: '🇷🇺 Русский', langEN: '🇬🇧 Английский',
-        bio1: 'Я — <strong>Рахимжан Бауржанулы</strong>, студент мультимедиа-технологий в <strong>Asia Pacific University</strong> (Куала-Лумпур), специализирующийся на <strong>виртуальной и дополненной реальности</strong>. Нахожусь на пересечении инженерии и искусства, создавая иммерсивные проекты, которые увлекают, обучают и раздвигают границы.',
-        bio2: 'Моя работа охватывает <strong>3D-моделирование</strong> в Blender, Maya и 3ds Max, <strong>разработку игр</strong> на Unity с C#, <strong>моушн-дизайн</strong> в Adobe Animate и <strong>UI/UX дизайн</strong> в Figma. Лучшие цифровые проекты выглядят так, будто созданы легко — но за ними стоит глубокая работа.',
-        hl1Title: 'Топ-10 · QS Impact Skills 2026',
-        hl1Desc: 'Участвовал с «Flood Runner» — 3D обучающей игрой по безопасности при наводнениях (SDG), и вошёл в Топ-10 среди лучших студенческих команд Малайзии.',
-        hl2Title: 'Disney СНГ — Визуальный дизайн и локализация',
-        hl2Desc: 'Работал над визуальным дизайном и казахско-русской локализацией для цифровых кампаний Disney в регионе СНГ.',
-        hl3Title: 'Дизайн-комитет · SIGGRAPH Malaysia 2026',
-        hl3Desc: 'Участвую в создании брендинга, промо-материалов и визуальной айдентики для студенческого отделения SIGGRAPH Malaysia.',
-        hl4Title: 'Исследование VR-музеев',
-        hl4Desc: 'Провожу академическое исследование, сравнивая фотореалистичный и стилизованный рендеринг в VR-музейных средах — анализ присутствия, погружения и эффективности обучения.',
-        hl5Title: 'Участник Global Game Jam',
-        hl5Desc: 'Создал полноценный игровой прототип за 48 часов — от 3D-ассетов до геймплейных механик и сборки сцен.',
-        skillsEyebrow: '02 / ЭКСПЕРТИЗА',
-        skillsTitle: 'Инструменты и <em>технологии</em>',
-        skill1: '3D и рендеринг', skill2: 'Геймдев и XR',
-        skill3: 'Дизайн и моушн', skill4: 'Веб и интерактив',
-        projEyebrow: '03 / ИЗБРАННЫЕ РАБОТЫ',
-        projTitle: 'Ключевые <em>проекты</em>',
-        projSubtext: 'Подборка моих самых значимых работ — от награждённых серьёзных игр до VR-исследований и международных дизайн-заказов.',
-        proj1Desc: '3D обучающая игра для QS Impact Skills 2026. Игроки проходят сценарии наводнения, изучая стратегии выживания и предотвращения, соответствующие целям устойчивого развития ООН. Вошла в Топ-10.',
-        proj2Desc: 'Академическое исследование, сравнивающее фотореалистичный и стилизованный рендеринг в VR-музеях — анализ присутствия, погружения и эффективности обучения.',
-        proj3Desc: 'Визуальный дизайн и казахско-русская локализация для цифровых кампаний Disney в СНГ. Адаптация креативных материалов для рынков Центральной Азии и Восточной Европы.',
-        proj4Desc: 'Брендинг и визуальная айдентика для студенческого отделения SIGGRAPH Malaysia 2026 — одной из ведущих конференций по компьютерной графике и интерактивным медиа в Азии.',
-        proj5Desc: 'Полноценный прототип за 48 часов на Global Game Jam — 3D-ассеты, механики и уровни.',
-        openProject: 'Открыть проект',
-        projAddLabel: 'Добавь свои работы в галерею ниже',
-        tlEyebrow: '04 / ПУТЬ',
-        tlTitle: 'Опыт и <em>достижения</em>',
-        tl1Role: 'Топ-10 финалист — Flood Runner',
-        tl1Desc: 'Разработал 3D обучающую игру по безопасности при наводнениях. Участвовал среди лучших студенческих команд и вошёл в Топ-10.',
-        tl2Role: 'Член дизайн-комитета',
-        tl2Desc: 'Создаю визуальную айдентику, брендинг мероприятий и промо-материалы для SIGGRAPH Malaysia 2026.',
-        tl3Role: 'Визуальный дизайнер и локализатор',
-        tl3Desc: 'Работал над визуальным дизайном и казахско-русской локализацией для цифровых кампаний Disney в СНГ.',
-        tl4Role: 'Участник Game Jam',
-        tl4Desc: 'Создал полноценную игру за 48 часов — 3D-ассеты, сборка сцен и дизайн механик.',
-        tl5Role: 'Исследование VR-рендеринга',
-        tl5Desc: 'Текущее сравнительное исследование фотореалистичного и стилизованного VR-рендеринга в музейных контекстах.',
-        tl6Role: 'BSc Мультимедиа — VR/AR',
-        tl6Desc: 'Студент 2 курса специальности Мультимедиа-технологии со специализацией VR/AR, изучающий 3D, геймдев, UX-дизайн и иммерсивные медиа.',
-        galEyebrow: '05 / ГАЛЕРЕЯ',
-        galTitle: 'Мои <em>работы</em>',
-        galSubtext: 'Загрузите рендеры, скриншоты игр, анимации и дизайнерские работы. Они появятся в живой галерее ниже.',
-        upImg: 'Изображения и рендеры', upVid: 'Видео и анимации', upDoc: 'Документы и PDF',
-        upImgSub: 'PNG · JPG · GIF · WebP', upVidSub: 'MP4 · WebM · MOV', upDocSub: 'Исследования · Кейсы',
-        galOutputTitle: 'Загруженные работы',
-        ctEyebrow: '06 / КОНТАКТ',
-        ctTitle: 'Давайте <em>свяжемся</em>',
-        ctNote: 'Открыт для стажировок, <em>коллабораций</em>, научного сотрудничества и творческих проектов.',
-        ctLoc: 'Местоположение', ctUni: 'Университет', ctLangs: 'Языки', ctStatus: 'Статус',
-        ctLocVal: 'Куала-Лумпур, Малайзия', ctUniVal: 'Asia Pacific University (APU)',
-        ctLangsVal: 'Казахский · Русский · Английский',
-        ctStatusVal: '✓ Открыт для предложений',
+        ctStatusVal: 'Открыт для предложений',
         fName: 'Имя', fEmail: 'Email', fSubject: 'Тема', fMessage: 'Сообщение',
         fSend: 'Отправить',
         phName: 'Ваше полное имя', phEmail: 'hello@example.com',
@@ -4046,12 +3966,12 @@ body.admin-mode .admin-badge {
         pmUploadHint: 'Загрузите скриншоты, рендеры или GIF для этого проекта.',
         pmUploadBtn: 'Добавить фото / GIF / видео',
         pmBack: '← Назад к проектам',
-        navCV: 'Резюме / CV', heroCV: '📄 Резюме / CV',
         filterAll: 'Все работы (5)', filterVR: 'VR / AR', filterGames: '3D и Игры', filterDesign: 'Дизайн и Брендинг',
         cvTitle: 'Резюме / Curriculum Vitae', cvSub: 'Рахимжан Бауржанулы · Мультимедиа и VR/AR',
-        cvClose: 'Закрыть', cvPrint: '📄 Просмотр / Печать PDF', cvDownload: '📥 Скачать CV'
+        cvClose: 'Закрыть', cvPrint: 'Просмотр / Печать PDF', cvDownload: 'Скачать CV'
       }
     };
+
 
     let currentLang = 'en';
 
@@ -4138,8 +4058,8 @@ body.admin-mode .admin-badge {
       </div>
 
       <div class="cv-actions">
-        <button class="btn btn-warm" onclick="printCV()" data-i18n="cvPrint">📄 Print / View PDF</button>
-        <button class="btn btn-outline" onclick="printCV()" data-i18n="cvDownload">📥 Download CV</button>
+        <button class="btn btn-warm" onclick="printCV()" data-i18n="cvPrint">Print / View PDF</button>
+        <button class="btn btn-outline" onclick="printCV()" data-i18n="cvDownload">Download CV</button>
       </div>
     </div>
   </div>
@@ -4147,7 +4067,7 @@ body.admin-mode .admin-badge {
 
 <!-- Admin Badge -->
 <div class="admin-badge" id="adminBadge">
-  <span>🔑 Admin Mode Active</span>
+  <span>ADMIN MODE ACTIVE</span>
   <button class="admin-exit-btn" onclick="exitAdminMode()">Exit</button>
 </div>
 
